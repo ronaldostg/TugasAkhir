@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scenes/scan_marker.unity
+  isLoaded: 1
+  isActive: 1
