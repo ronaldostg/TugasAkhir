@@ -5,14 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class Btn_manager : MonoBehaviour
 {
-    
-    public void LoadScene(string scenename){
+    public void loadToCamera(string scenename){
         SceneManager.LoadScene(scenename);
-        Debug.Log("Tombol Berhasil");
     }
 
-    public void TestButton(){
-        Debug.Log("Tombol Tentang");
-        // SceneManager.LoadScene()
+    
+    
+    public void keluar(){
+        Debug.Log("keluar");
+        Application.Quit();
     }
+
+    // public void 
+
 }

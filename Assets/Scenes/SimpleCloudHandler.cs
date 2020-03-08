@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
 {
 
@@ -24,24 +25,11 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
 
     private ObjectTracker mObjectTracker;
     public ImageTargetBehaviour imageTargetBehaviour;
-    public GameObject gedung_rektorat, entrance_hall, kantin_baru;
-    // public Text hasil_teks;
+    public GameObject gedung_rektorat, entrance_hall, kantin_baru, gedung_9;
 
 
 
-    // public string nama_gedung;
-
-
-
-    // public GameObject gedung_rektorat, entrance_hall;
-    //public ImageTargetBehaviour ImageTargetTemplate;
-
-
-
-
-    public SimpleCloudHandler(){
-
-    }
+   
     void Start()
     {
 
@@ -56,6 +44,23 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
         }
 
         mCloudRecoBehaviour = cloudRecoBehaviour;
+        // OnNewSearchResult();
+
+        
+        
+
+        // OnNewSearchResult(TargetFinder.TargetSearchResult targetSearchResult);
+        //  TargetFinder.CloudRecoSearchResult cloudRecoSearchResult = (TargetFinder.CloudRecoSearchResult)targetSearchResult;
+
+
+
+        // grabbing all of the game object
+        gedung_rektorat = GameObject.Find("gedung_rektorat");
+        kantin_baru = GameObject.Find("kantin_baru");
+        entrance_hall = GameObject.Find("entrance_hall");
+        gedung_9 = GameObject.Find("gedung_9");
+        
+    
     }
 
     public void OnInitialized(TargetFinder targetFinder)
@@ -63,7 +68,7 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
         Debug.Log("Cloud Reco initialized");
 
         // get a reference to the Image Tracker, remember it
-        mImageTracker = (ObjectTracker)TrackerManager.Instance.GetTracker<ObjectTracker>();
+        // mImageTracker = (ObjectTracker)TrackerManager.Instance.GetTracker<ObjectTracker>();
 
     }
 
@@ -88,10 +93,11 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
         if (scanning)
         {
              // clear all known trackables
-            ObjectTracker tracker = TrackerManager.Instance.GetTracker<ObjectTracker>();
+            // ObjectTracker tracker = TrackerManager.Instance.GetTracker<ObjectTracker>();
+            // tracker.GetTargetFinder<ImageTargetFinder>().ClearTrackables(false);
+            var tracker = TrackerManager.Instance.GetTracker<ObjectTracker>();
             tracker.GetTargetFinder<ImageTargetFinder>().ClearTrackables(false);
-            //var tracker = TrackerManager.Instance.GetTracker<ObjectTracker>();
-            //tracker.GetTargetFinder<ImageTargetFinder>().ClearTrackables(false);
+            // tracker.TargetFinder.ClearTrackables(false);
         }
     }
 
@@ -99,84 +105,65 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
 
 
     //<param name = "targetSearchResult" ></ param >
+
     // Here we handle a cloud target recognition event
     public void OnNewSearchResult(TargetFinder.TargetSearchResult targetSearchResult)
     {
-        
         try{
-            TargetFinder.CloudRecoSearchResult cloudRecoSearchResult = (TargetFinder.CloudRecoSearchResult)targetSearchResult;
+
+            TargetFinder.CloudRecoSearchResult cloudRecoSearchResult =  (TargetFinder.CloudRecoSearchResult)targetSearchResult;
             // do something with the target metadata
-            //mTargetMetadata = cloudRecoSearchResult.MetaData;
-            // stop the target finder (i.e. stop scanning the cloud)
-            //mCloudRecoBehaviour.CloudRecoEnabled = false;
-            //GameObject newImageTarget = Instantiate(ImageTargetTemplate.gameObject) as GameObject;
-
-            GameObject newImageTarget = Instantiate(imageTargetBehaviour.gameObject) as GameObject;
-
-            GameObject augmentation = null;
-
-            if (augmentation != null)
-                augmentation.transform.parent = newImageTarget.transform;
-            
-        
-            imageTargetBehaviour =(ImageTargetBehaviour)mImageTracker.GetTargetFinder<ImageTargetFinder>().EnableTracking(targetSearchResult, newImageTarget);
-            // do something with the target metadata
+            // mTargetMetadata = targetSearchResult.MetaData;
             mTargetMetadata = cloudRecoSearchResult.MetaData;
-            mTargetName = cloudRecoSearchResult.TargetName;
+            
+            
             // stop the target finder (i.e. stop scanning the cloud)
             mCloudRecoBehaviour.CloudRecoEnabled = false;
-            // getMetaData();
 
-            string model_name = mTargetMetadata;
+            Debug.Log("Metadata target :"+mTargetMetadata); 
 
-            // // while(mIsScanning==)
-            switch (model_name)
-            {
-            case "entrance_hall":
-                Destroy(imageTargetBehaviour.gameObject.transform.Find("gedung_rektorat"));
-                Destroy(imageTargetBehaviour.gameObject.transform.Find("kantin_baru").gameObject);
-                break;
-            case "gedung_rektorat":
-
-                   Destroy(imageTargetBehaviour.gameObject.transform.Find("entrance_hall").gameObject);
-                   Destroy(imageTargetBehaviour.gameObject.transform.Find("kantin_baru").gameObject);
-            
-                break;
-
-                case "kantin_baru" :
-                    Destroy(imageTargetBehaviour.gameObject.transform.Find("gedung_rektorat"));
-                    Destroy(imageTargetBehaviour.gameObject.transform.Find("entrance_hall").gameObject);
-                    break;
+            if(mTargetMetadata == "gedung_rektorat"){
+                gedung_rektorat.SetActive(true);
+                kantin_baru.SetActive(false);
+                entrance_hall.SetActive(false);
+                gedung_9.SetActive(false);
+            }else if(mTargetMetadata == "kantin_baru"){  
+                gedung_rektorat.SetActive(false);
+                kantin_baru.SetActive(true);
+                entrance_hall.SetActive(false);
+                gedung_9.SetActive(false);
+            }else if(mTargetMetadata == "entrance_hall"){
+                gedung_rektorat.SetActive(false);
+                kantin_baru.SetActive(false);
+                entrance_hall.SetActive(true);
+                gedung_9.SetActive(false);
+            }else if(mTargetMetadata == "gd 911"){
+                gedung_9.SetActive(true);
+                gedung_rektorat.SetActive(false);
+                kantin_baru.SetActive(false);
+                entrance_hall.SetActive(false);
             }
 
-            // Debug.Log(model_name);
 
             
 
-            
-            // if (model_name == "entrance_hall")
-            // {
-            //     Destroy(imageTargetBehaviour.gameObject.transform.Find("gedung_rektorat").gameObject);
-            // }
-            // else if (model_name == "gedung_rektorat")
-            // {
-            //     Destroy(imageTargetBehaviour.gameObject.transform.Find("entrance_hall").gameObject);
-            // }
-            
-                
-            
+           if (imageTargetBehaviour) {
+                // enable the new result with the same ImageTargetBehaviour: 
+                ObjectTracker tracker = TrackerManager.Instance.GetTracker<ObjectTracker>(); 
+                // (imageTargetBehaviour)tracker.TargetFinder.EnableTracking(targetSearchResult, imageTargetBehaviour.gameObject);
+                tracker.GetTargetFinder<ImageTargetFinder>().EnableTracking(targetSearchResult, imageTargetBehaviour.gameObject);
 
-
-            if (!mIsScanning)
-            {
-                // stop the target finder
-                mCloudRecoBehaviour.CloudRecoEnabled = true;
             }
 
-        }catch(Exception e){
-            Debug.LogWarning("Letak error terdapat di : "+ e,this);
-        }
+
+       }catch(Exception e){
+           
+           Debug.Log("Letak Error di :"+e.Message);
+            TrackerManager.Instance.GetStateManager().ReassociateTrackables();
+           
+       }
     }
+
 
     void OnGUI()
     {
@@ -198,20 +185,14 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
             {
                 // Restart TargetFinder
                 mCloudRecoBehaviour.CloudRecoEnabled = true;
+                gedung_rektorat.SetActive(false);
+                kantin_baru.SetActive(false);
+                entrance_hall.SetActive(false);
+                
             }
         }
     }
 
-    // public void LoadInfo(string metadata){
-    //     // SceneManager.LoadScene(scene)
-    //     TargetFinder.TargetSearchResult targetSearchResult;
-    //     TargetFinder.CloudRecoSearchResult cloudRecoSearchResult = (TargetFinder.CloudRecoSearchResult)targetSearchResult;
-    //     metadata = cloudRecoSearchResult.MetaData;
-    //     Debug.Log("Menuju halaman info "+metadata);
-    // }
 
-    // public string getMetaData(){
-    //     return this.mTargetMetadata;
-    // }
     
 }

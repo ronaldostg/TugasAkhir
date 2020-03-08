@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Informasi.unity
     guid: e4a5138a314d43a478fe0b6afaa9e6f8
+  - enabled: 1
+    path: Assets/Scenes/peta_scene.unity
+    guid: 98791dfcc6b18504cb8674ddb3f8b7a5
   m_configObjects: {}
