@@ -27,6 +27,8 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
     public ImageTargetBehaviour imageTargetBehaviour;
     public GameObject gedung_rektorat, entrance_hall, kantin_baru, gedung_9;
 
+    public GameObject gedung_7;
+
 
 
    
@@ -59,6 +61,8 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
         kantin_baru = GameObject.Find("kantin_baru");
         entrance_hall = GameObject.Find("entrance_hall");
         gedung_9 = GameObject.Find("gedung_9");
+        gedung_7 = GameObject.Find("gedung_7");
+        
         
     
     }
@@ -122,6 +126,8 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
 
             Debug.Log("Metadata target :"+mTargetMetadata); 
 
+
+
             if(mTargetMetadata == "gedung_rektorat"){
                 gedung_rektorat.SetActive(true);
                 kantin_baru.SetActive(false);
@@ -154,6 +160,8 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
                 tracker.GetTargetFinder<ImageTargetFinder>().EnableTracking(targetSearchResult, imageTargetBehaviour.gameObject);
 
             }
+
+            getMetaData(mTargetMetadata);
 
 
        }catch(Exception e){
@@ -191,6 +199,10 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
                 
             }
         }
+    }
+
+    public void getMetaData(string a){
+        
     }
 
 

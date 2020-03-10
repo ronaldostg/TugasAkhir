@@ -20,6 +20,7 @@ public class Info_manager : MonoBehaviour
     public void LoadScene(string scenename){
         SceneManager.LoadScene(scenename);
         Debug.Log("Ke halaman Info");
+        
     }
     // public void LoadScene(string scenename){
     //     SceneManager.LoadScene(scenename);

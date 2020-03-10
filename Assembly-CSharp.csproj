@@ -90,6 +90,7 @@
      <Compile Include="Assets\Scenes\Info_manager.cs" />
      <Compile Include="Assets\Scenes\LoadingSceneControl.cs" />
      <Compile Include="Assets\Scenes\LoadingToScanning.cs" />
+     <Compile Include="Assets\Scenes\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scenes\SimpleCloudHandler.cs" />
      <None Include="Assets\Vuforia\Shaders\ColoredLines.shader" />
      <None Include="Assets\Vuforia\Shaders\CameraDiffuse.shader" />
