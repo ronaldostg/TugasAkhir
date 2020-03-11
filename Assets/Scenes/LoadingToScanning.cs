@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DentedPixel;
+using UnityEngine.UI;
 
 public class LoadingToScanning : MonoBehaviour
 {
 
     public GameObject bar;
     public int time;
+    public GameObject tunggu;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,9 @@ public class LoadingToScanning : MonoBehaviour
     }
 
     void loadToScanMarker(){
+
         SceneManager.LoadScene("scan_marker");
     }
+
+
 }

@@ -9,6 +9,10 @@ public class Btn_manager : MonoBehaviour
         SceneManager.LoadScene(scenename);
     }
 
+    public void backToCamera(string scenename){
+        SceneManager.LoadScene(scenename);
+    }
+
     
     
     public void keluar(){

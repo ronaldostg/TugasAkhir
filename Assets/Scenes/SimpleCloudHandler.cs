@@ -119,31 +119,32 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
             // do something with the target metadata
             // mTargetMetadata = targetSearchResult.MetaData;
             mTargetMetadata = cloudRecoSearchResult.MetaData;
+            mTargetName = cloudRecoSearchResult.TargetName;
             
             
             // stop the target finder (i.e. stop scanning the cloud)
             mCloudRecoBehaviour.CloudRecoEnabled = false;
 
-            Debug.Log("Metadata target :"+mTargetMetadata); 
+            Debug.Log("Name target :"+mTargetName); 
 
 
 
-            if(mTargetMetadata == "gedung_rektorat"){
+            if(mTargetName == "gedung_rektorat"){
                 gedung_rektorat.SetActive(true);
                 kantin_baru.SetActive(false);
                 entrance_hall.SetActive(false);
                 gedung_9.SetActive(false);
-            }else if(mTargetMetadata == "kantin_baru"){  
+            }else if(mTargetName == "kantin_baru"){  
                 gedung_rektorat.SetActive(false);
                 kantin_baru.SetActive(true);
                 entrance_hall.SetActive(false);
                 gedung_9.SetActive(false);
-            }else if(mTargetMetadata == "entrance_hall"){
+            }else if(mTargetName == "entrance_hall"){
                 gedung_rektorat.SetActive(false);
                 kantin_baru.SetActive(false);
                 entrance_hall.SetActive(true);
                 gedung_9.SetActive(false);
-            }else if(mTargetMetadata == "gd 911"){
+            }else if(mTargetName == "gd 911"){
                 gedung_9.SetActive(true);
                 gedung_rektorat.SetActive(false);
                 kantin_baru.SetActive(false);
