@@ -27,7 +27,7 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
     public ImageTargetBehaviour imageTargetBehaviour;
     public GameObject gedung_rektorat, entrance_hall, kantin_baru, gedung_9;
 
-    public GameObject gedung_7;
+    public GameObject gedung_7, gedung_8;
 
 
 
