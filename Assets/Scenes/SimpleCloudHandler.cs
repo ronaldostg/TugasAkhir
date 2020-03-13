@@ -27,7 +27,7 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
     public ImageTargetBehaviour imageTargetBehaviour;
     public GameObject gedung_rektorat, entrance_hall, kantin_baru, gedung_9;
 
-    public GameObject gedung_7, gedung_8;
+    public GameObject gedung_7, kantor_satpam, studio;
 
 
 
@@ -62,6 +62,8 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
         entrance_hall = GameObject.Find("entrance_hall");
         gedung_9 = GameObject.Find("gedung_9");
         gedung_7 = GameObject.Find("gedung_7");
+        kantor_satpam = GameObject.Find("kantor_satpam");
+        studio = GameObject.Find("studio");
         
         
     
@@ -97,8 +99,6 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
         if (scanning)
         {
              // clear all known trackables
-            // ObjectTracker tracker = TrackerManager.Instance.GetTracker<ObjectTracker>();
-            // tracker.GetTargetFinder<ImageTargetFinder>().ClearTrackables(false);
             var tracker = TrackerManager.Instance.GetTracker<ObjectTracker>();
             tracker.GetTargetFinder<ImageTargetFinder>().ClearTrackables(false);
             // tracker.TargetFinder.ClearTrackables(false);
@@ -116,9 +116,7 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
         try{
 
             TargetFinder.CloudRecoSearchResult cloudRecoSearchResult =  (TargetFinder.CloudRecoSearchResult)targetSearchResult;
-            // do something with the target metadata
-            // mTargetMetadata = targetSearchResult.MetaData;
-            mTargetMetadata = cloudRecoSearchResult.MetaData;
+            // do something with the target name
             mTargetName = cloudRecoSearchResult.TargetName;
             
             
@@ -128,29 +126,56 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
             Debug.Log("Name target :"+mTargetName); 
 
 
-
+            //statement untuk menampilkan objek 3d berdasarkan  target name
             if(mTargetName == "gedung_rektorat"){
                 gedung_rektorat.SetActive(true);
                 kantin_baru.SetActive(false);
                 entrance_hall.SetActive(false);
                 gedung_9.SetActive(false);
+                gedung_7.SetActive(false);
+                studio.SetActive(false);
+                kantor_satpam.SetActive(false);
             }else if(mTargetName == "kantin_baru"){  
                 gedung_rektorat.SetActive(false);
                 kantin_baru.SetActive(true);
                 entrance_hall.SetActive(false);
                 gedung_9.SetActive(false);
+                gedung_7.SetActive(false);
+                studio.SetActive(false);
+                kantor_satpam.SetActive(false);
             }else if(mTargetName == "entrance_hall"){
                 gedung_rektorat.SetActive(false);
                 kantin_baru.SetActive(false);
                 entrance_hall.SetActive(true);
                 gedung_9.SetActive(false);
-            }else if(mTargetName == "gd 911"){
-                gedung_9.SetActive(true);
+                gedung_7.SetActive(false);
+                studio.SetActive(false);
+                kantor_satpam.SetActive(false);
+            }else if(mTargetName == "gedung_9"){
                 gedung_rektorat.SetActive(false);
                 kantin_baru.SetActive(false);
                 entrance_hall.SetActive(false);
+                gedung_9.SetActive(true);
+                gedung_7.SetActive(false);
+                studio.SetActive(false);
+                kantor_satpam.SetActive(false);
+            }else if(mTargetName == "gedung_7"){
+                gedung_rektorat.SetActive(false);
+                kantin_baru.SetActive(false);
+                entrance_hall.SetActive(false);
+                gedung_9.SetActive(false);
+                gedung_7.SetActive(true);
+                studio.SetActive(false);
+                kantor_satpam.SetActive(false);
+            }else if(mTargetName == "studio"){
+                gedung_rektorat.SetActive(false);
+                kantin_baru.SetActive(false);
+                entrance_hall.SetActive(false);
+                gedung_9.SetActive(false);
+                gedung_7.SetActive(false);
+                studio.SetActive(true);
+                kantor_satpam.SetActive(false);
             }
-
 
             
 
@@ -162,7 +187,6 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
 
             }
 
-            getMetaData(mTargetMetadata);
 
 
        }catch(Exception e){
@@ -177,10 +201,10 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
     void OnGUI()
     {
         GUI.Box(new Rect(100, 100, 200, 50), mIsScanning ? "Scanning" : "Not scanning");
-        // Display metadata of latest detected cloud-target
-        GUI.Box(new Rect(100, 200, 200, 50), "Metadata: " + mTargetMetadata);
+        // // Display metadata of latest detected cloud-target
+        // GUI.Box(new Rect(100, 200, 200, 50), "Metadata: " + mTargetMetadata);
         // hasil_teks.set
-
+        // Display target name of latest detected cloud-target
         GUI.Box(new Rect(100, 300, 200, 50), "Target name: " + mTargetName);
 
         // if(GUI.Button(new Rect(400, 200, 200, 50), "Lihat Info")){
@@ -197,14 +221,16 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
                 gedung_rektorat.SetActive(false);
                 kantin_baru.SetActive(false);
                 entrance_hall.SetActive(false);
+                gedung_9.SetActive(false);
+                gedung_7.SetActive(false);
+                studio.SetActive(false);
+                kantor_satpam.SetActive(false);
                 
             }
         }
     }
 
-    public void getMetaData(string a){
-        
-    }
+
 
 
     
