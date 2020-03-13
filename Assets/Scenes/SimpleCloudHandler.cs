@@ -107,9 +107,6 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
 
 
 
-
-    //<param name = "targetSearchResult" ></ param >
-
     // Here we handle a cloud target recognition event
     public void OnNewSearchResult(TargetFinder.TargetSearchResult targetSearchResult)
     {
@@ -117,7 +114,12 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
 
             TargetFinder.CloudRecoSearchResult cloudRecoSearchResult =  (TargetFinder.CloudRecoSearchResult)targetSearchResult;
             // do something with the target name
-            mTargetName = cloudRecoSearchResult.TargetName;
+            
+            // mTargetName = cloudRecoSearchResult.TargetName;
+            mTargetName = targetSearchResult.TargetName;
+
+
+
             
             
             // stop the target finder (i.e. stop scanning the cloud)
