@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/User/Desktop/file print/CobaAR.apk
+E:/Augmented_reality/DelAR.apk
 SceneListBegin?
 Assets/Scenes/HalamanUtama.unity
 Assets/Scenes/scan_marker.unity

@@ -5,9 +5,6 @@ using UnityEngine;
 using Vuforia;
 using System.IO;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
@@ -20,8 +17,7 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
     private ObjectTracker mImageTracker;
     private GameObject newImageTarget;
     // Start is called before the first frame update
-    private string mTargetMetadata = "";
-    private string mTargetName = "";
+    private static string mTargetName = "";
 
     private ObjectTracker mObjectTracker;
     public ImageTargetBehaviour imageTargetBehaviour;
@@ -38,6 +34,7 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
 
         // register this event handler at the cloud reco behaviour 
         CloudRecoBehaviour cloudRecoBehaviour = GetComponent<CloudRecoBehaviour>();
+        
 
         if (cloudRecoBehaviour)
         {
@@ -46,15 +43,7 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
         }
 
         mCloudRecoBehaviour = cloudRecoBehaviour;
-        // OnNewSearchResult();
-
         
-        
-
-        // OnNewSearchResult(TargetFinder.TargetSearchResult targetSearchResult);
-        //  TargetFinder.CloudRecoSearchResult cloudRecoSearchResult = (TargetFinder.CloudRecoSearchResult)targetSearchResult;
-
-
 
         // grabbing all of the game object
         gedung_rektorat = GameObject.Find("gedung_rektorat");
@@ -110,7 +99,7 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
     // Here we handle a cloud target recognition event
     public void OnNewSearchResult(TargetFinder.TargetSearchResult targetSearchResult)
     {
-        try{
+        
 
             TargetFinder.CloudRecoSearchResult cloudRecoSearchResult =  (TargetFinder.CloudRecoSearchResult)targetSearchResult;
             // do something with the target name
@@ -119,11 +108,12 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
             mTargetName = targetSearchResult.TargetName;
 
 
-
             
             
             // stop the target finder (i.e. stop scanning the cloud)
             mCloudRecoBehaviour.CloudRecoEnabled = false;
+
+           
 
             Debug.Log("Name target :"+mTargetName); 
 
@@ -154,7 +144,7 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
                 studio.SetActive(false);
                 kantor_satpam.SetActive(false);
             }else if(mTargetName == "gedung_9"){
-                gedung_rektorat.SetActive(false);
+                gedung_rektorat.SetActive(false);   
                 kantin_baru.SetActive(false);
                 entrance_hall.SetActive(false);
                 gedung_9.SetActive(true);
@@ -177,11 +167,15 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
                 gedung_7.SetActive(false);
                 studio.SetActive(true);
                 kantor_satpam.SetActive(false);
-            }
+        }
+        
 
-            
+        
 
-           if (imageTargetBehaviour) {
+           
+
+
+            if (imageTargetBehaviour) {
                 // enable the new result with the same ImageTargetBehaviour: 
                 ObjectTracker tracker = TrackerManager.Instance.GetTracker<ObjectTracker>(); 
                 // (imageTargetBehaviour)tracker.TargetFinder.EnableTracking(targetSearchResult, imageTargetBehaviour.gameObject);
@@ -189,25 +183,35 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
 
             }
 
+   
 
-
-       }catch(Exception e){
-           
-           Debug.Log("Letak Error di :"+e.Message);
-            TrackerManager.Instance.GetStateManager().ReassociateTrackables();
-           
-       }
+       
     }
+    
+    
+    //method yang digunakan untuk mengambil target name dari  
+    public static string getTargetName()
+    {
+
+        return mTargetName;
+        
+
+    }
+    
+
+
+
+    
 
 
     void OnGUI()
     {
-        GUI.Box(new Rect(100, 100, 200, 50), mIsScanning ? "Scanning" : "Not scanning");
-        // // Display metadata of latest detected cloud-target
-        // GUI.Box(new Rect(100, 200, 200, 50), "Metadata: " + mTargetMetadata);
-        // hasil_teks.set
-        // Display target name of latest detected cloud-target
-        GUI.Box(new Rect(100, 300, 200, 50), "Target name: " + mTargetName);
+        //GUI.Box(new Rect(100, 100, 200, 50), mIsScanning ? "Scanning" : "Not scanning");
+        //// // Display metadata of latest detected cloud-target
+        //// GUI.Box(new Rect(100, 200, 200, 50), "Metadata: " + mTargetMetadata);
+        //// hasil_teks.set
+        //// Display target name of latest detected cloud-target
+        //GUI.Box(new Rect(100, 300, 200, 50), "Target name: " + mTargetName);
 
         // if(GUI.Button(new Rect(400, 200, 200, 50), "Lihat Info")){
         //     Debug.Log("Menuju halaman info "+mTargetMetadata);
@@ -230,10 +234,19 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
                 
             }
         }
+
+        
     }
 
-
-
-
     
+
+
+
+
+
+
+
+
+
+
 }
