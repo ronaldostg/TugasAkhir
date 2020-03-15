@@ -209,9 +209,9 @@ public class SimpleCloudHandler : MonoBehaviour, IObjectRecoEventHandler
         //GUI.Box(new Rect(100, 100, 200, 50), mIsScanning ? "Scanning" : "Not scanning");
         //// // Display metadata of latest detected cloud-target
         //// GUI.Box(new Rect(100, 200, 200, 50), "Metadata: " + mTargetMetadata);
-        //// hasil_teks.set
-        //// Display target name of latest detected cloud-target
-        //GUI.Box(new Rect(100, 300, 200, 50), "Target name: " + mTargetName);
+        //// hasil_teks.set 
+        // Display target name of latest detected cloud-target
+        GUI.Box(new Rect(100, 400, 200, 50), "Target name: " + mTargetName);
 
         // if(GUI.Button(new Rect(400, 200, 200, 50), "Lihat Info")){
         //     Debug.Log("Menuju halaman info "+mTargetMetadata);
